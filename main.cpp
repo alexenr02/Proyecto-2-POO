@@ -19,9 +19,6 @@ void mostrarMenu()
         cout << "g. Terminar. " << endl;
 
 }
-
-
-
 int main()
 {
     setlocale(LC_CTYPE,"Spanish");
@@ -187,8 +184,9 @@ continua:
         {
             case 'A':
                 cout << "---------------------------|\n";
-                cout << "--ID--|-------Nombre-------|\n";
+                cout << "  ID  |       Nombre       |\n";
                 cout << "______|____________________|\n";
+                cout << "      |                     \n";
                 for(int x=0; x<a; x++)
                     arrListaActores[x].muestraActor();
                 break;
@@ -196,9 +194,17 @@ continua:
                 cout << "---------------------------------Peliculas--------------------------------" << endl;
                 for(int x=0; x<e; x++)
                     {
-                        cout << "Título: " ;
-                        cout << arrPeliculas[x].getTitulo() << ".\nAño :" << arrPeliculas[x].getAnio() << "\t Duración: " << arrPeliculas[x].getDuracion() << "\t";
-                        cout << "Género: " << arrPeliculas[x].getGenero() << "\nActores: " ;
+                        cout << "__________________\n";
+                        cout << "                  |\n";
+                        cout << "      Título      |    ";
+                        cout << arrPeliculas[x].getTitulo() <<"."<< endl;
+                        cout << "__________________|\n\n";
+                        cout << "________________________________\n";
+                        cout << "    |\t            |\t        |\n";
+                        cout << "Año "<<"|\tDuración    " << "|\tGénero  |" << endl;
+                        cout << "____|_______________|___________|\n\n";
+                        cout << arrPeliculas[x].getAnio() <<"\t"<< arrPeliculas[x].getDuracion()<< " minutos.\t";
+                        cout <<  arrPeliculas[x].getGenero() << "\n\n---------Actores----------\n" ;
                         arrPeliculas[x].getListaCompleta();
                         cout << endl << endl;
                     }
@@ -207,9 +213,9 @@ continua:
                 cout << "------------------------------Funciones del día----------------------------" << endl << endl;
                 for(int x=0; x<numFuncionesXDia;x++)
                 {
-                    cout << "-----------Función " << x+1 <<"----------------\n";
-                    cout << "Clave de la función: " << arrFuncionesXDia[x].getCveFuncion()<< endl;
-                    cout << "Nombre de la pelicula: ";
+                    cout << "----------------->     Función " << x+1 <<"      <----------------\n\n";
+                    cout << "Clave" << "\tNombre de la pelicula"<< "\t# de sala"  << "\tHora\n\n";
+                    cout << "  "<<arrFuncionesXDia[x].getCveFuncion()<< "\t";
                     for (int y=0;y<e;y++)
                     {
                         if(arrFuncionesXDia[x].getNumPeli()==arrPeliculas[y].getNumPeli())
@@ -218,14 +224,16 @@ continua:
                         }
                     }
                     cout << nombrePeli << "\t";
-                    cout << "Número de sala: " << arrFuncionesXDia[x].getSala() << "\tHora: ";
+                    cout <<"     "<< arrFuncionesXDia[x].getSala()<< "\t\t";
                     arrFuncionesXDia[x].getHora().muestraHora();
                     cout << "\n\n";
                 }
                 break;
             case 'D':
-                cout << "\n¿Qué hora deseas consultar? --> ";
+                int encontro;
+
             do{
+                cout << "\n¿Qué hora deseas consultar? --> ";
                 validar=true;
                 cin >> hra;
                 (hra>=0 && hra<25)?hra:validar=false;
@@ -247,16 +255,20 @@ continua:
                         {
                             if(arrFuncionesXDia[x].getNumPeli()==arrPeliculas[y].getNumPeli())
                             {
-                                cout << "------------------Funciones a las: ";
+                                cout << "\n------------------Funciones a las: ";
                                 arrFuncionesXDia[x].getHora().muestraHora();
                                 cout <<" ------------------\n\n";
                                 cout << "Pelicula: " << arrPeliculas[y].getTitulo()<<"." << "\t--> Sala : ";
                                 cout << arrFuncionesXDia[x].getSala() << endl <<endl;
+                                encontro=1;
                             }
                         }
                     }
 
             }
+            if(encontro!=1)
+                cout << "No hay funciones a esa hora.\n\n";
+
 
                 break;
             case 'E':
@@ -334,8 +346,4 @@ continua:
         }
 
     }while(terminar==false);
-
-        //arrPeliculas[0].getListaCompleta();
-        //cout << arrPeliculas[0].gettitulo() << endl;
-
 }
