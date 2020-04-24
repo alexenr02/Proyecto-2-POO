@@ -14,7 +14,7 @@ void mostrarMenu()
         cout << "b. Mostrar todas las peliculas de la lista." << endl;
         cout << "c. Mostrar las funciones disponibles. " << endl;
         cout << "d. Consulta funciones por hora. " << endl;
-        cout << "e. Consulta por clave de funcion. " << endl;
+        cout << "e. Consulta por clave de pelicula. " << endl;
         cout << "f. Consulta de peliculas en las que participa un actor." << endl;
         cout << "g. Terminar. " << endl;
 
@@ -115,7 +115,7 @@ int main()
             }while(validar==false);
             numfuncion=0;
             do{
-                cout << "Ingresa el número de la funcion: ";
+                cout << "Ingresa el número de la Pelicula: ";
                 cin >> numfuncion;
                 for(int x=0; x<e;x++)
                 {
