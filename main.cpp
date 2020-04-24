@@ -33,6 +33,7 @@ int main()
     string nombreActor,genero,nombrePeli,linea1;
     Actor temporal[10]; //arreglo que me sirve para agregar los actores correspondientes a cada pelicula. Como al principio no sé cuantos serán, hago un arreglo con los que se ocupen y luego los agrego al atributo de la clase pelicula.
     char opcionDeseada;
+    int noexiste=0;
 
     int datosActores[10]; //arreglo que me sirve para saber qué ids guardar en mi objeto tipo pelicula
         while(getline(archivoActores,nombreActor))
@@ -306,6 +307,7 @@ continua:
                 cout << endl;
                 break;
             case 'F':
+
                 do{
                     cout << "Ingresa el ID del actor: ";
                     validar=false;
@@ -325,10 +327,14 @@ continua:
                                     if(arrListaActores[variable].getiD()==arrPeliculas[x].getlistaActores(y).getiD())
                                         {
                                             cout <<"\n\n"<< arrPeliculas[x].getTitulo() << "   ||   Año: " << arrPeliculas[x].getAnio();
+                                        }else{
+                                        noexiste=1;
                                         }
                                 }
                     if(validar==false)
                         cout << "Error. No ingresaste un ID válido, intenta de nuevo. \n\n";
+                    if(noexiste==1)
+                        cout << "\nEste actor no participa en ninguna película :c \n\n";
 
                 }while(validar==false);
 
