@@ -33,7 +33,7 @@ int main()
     string nombreActor,genero,nombrePeli,linea1;
     Actor temporal[10]; //arreglo que me sirve para agregar los actores correspondientes a cada pelicula. Como al principio no sé cuantos serán, hago un arreglo con los que se ocupen y luego los agrego al atributo de la clase pelicula.
     char opcionDeseada;
-    int noexiste=0;
+
 
     int datosActores[10]; //arreglo que me sirve para saber qué ids guardar en mi objeto tipo pelicula
         while(getline(archivoActores,nombreActor))
@@ -174,6 +174,9 @@ continua:
         }
     do
     {
+        int enc=0,enc2=0;
+        int noparticipa=0;
+        int aux;
         mostrarMenu();
         cout << "\nTu opción es:(A,B,C,D,E, F o G) --->  ";
         cin >> opcionDeseada;
@@ -307,8 +310,9 @@ continua:
                 cout << endl;
                 break;
             case 'F':
-
                 do{
+                    enc=0,enc2=0;
+                    noparticipa=0;
                     cout << "Ingresa el ID del actor: ";
                     validar=false;
                     cin >>iDD;
@@ -320,23 +324,39 @@ continua:
                                     validar=true;
                                 }
                         }
+                        noparticipa=1;
                     if(validar==true)
+                    aux=0;
                             for(int x=0; x<e;x++)
                                 for(int y=0; y<cantidadAct;y++)
                                 {
                                     if(arrListaActores[variable].getiD()==arrPeliculas[x].getlistaActores(y).getiD())
                                         {
-                                            cout <<"\n\n"<< arrPeliculas[x].getTitulo() << "   ||   Año: " << arrPeliculas[x].getAnio();
-                                        }else{
-                                        noexiste=1;
+
+                                            if(aux==0)
+                                            {
+                                                cout << "\n\nID: " << arrPeliculas[x].getlistaActores(y).getiD() << "\t Nombre: ";
+                                                cout <<arrListaActores[variable].getNombre() ;
+                                                aux++;
+                                            }
+                                            if(aux>=0)
+                                                cout <<"\n\n"<< arrPeliculas[x].getTitulo() << "   ||   Año: " << arrPeliculas[x].getAnio();
+                                                noparticipa--;
+                                                enc2=5;
+
                                         }
                                 }
-                    if(validar==false)
+                    if(validar==false){
                         cout << "Error. No ingresaste un ID válido, intenta de nuevo. \n\n";
-                    if(noexiste==1)
-                        cout << "\nEste actor no participa en ninguna película :c \n\n";
 
-                }while(validar==false);
+                    }
+                    if(noparticipa==1 && validar==true)
+                        {cout << "\n El actor no participa en ninguna pelicula de la lista. \n\n";
+                        enc=1;
+                        }
+
+
+                }while(validar==false||enc==1||enc2<1);
 
                 break;
             case 'G':
